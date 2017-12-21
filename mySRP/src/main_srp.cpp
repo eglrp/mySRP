@@ -39,7 +39,7 @@ int main( int argc, const char * argv[] )
 {
       
     
-    
+        // parameters to test
         argv[1] = "GPSIIR_NONAP.txt";
     
         argv[2] = "1";
