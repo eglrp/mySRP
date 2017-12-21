@@ -40,17 +40,17 @@ int main( int argc, const char * argv[] )
       
     
         // test main function parameters
-        argv[1] = "GPSIIR_NONAP.txt";
+       // argv[1] = "GPSIIR_NONAP.txt";
     
-        argv[2] = "1";
+       // argv[2] = "1";
     
-        argv[3] = "0.01";
+       // argv[3] = "0.01";
     
-        argv[4] = "./";
+       // argv[4] = "./";
     
-        argv[5] = ".";
+       // argv[5] = ".";
         
-        argv[6] ="180,179,-179";
+      //  argv[6] ="180,179,-179";
     
     printf("***********************************************************************************\n");
     printf("Complex Space Crafts Solar Radiation Pressure Force Modelling software\n");
@@ -141,21 +141,21 @@ int main( int argc, const char * argv[] )
    		}
     }		
     
-//   
+   
 //   printf("\n");
 //   for(int i = 0 ; i< lat_vec.size(); i++ )
 //   {
-//   		
-//   		printf("%f ", lat_vec[i]);
+//
+//           printf("%f ", lat_vec[i]);
 //   }
-//   
+//
 //   printf("\n ");
 //   
 //   for(int i = 0 ; i< lon_vec.size(); i++ )
 //   {
-//   		printf("%f ", lon_vec[i]);
+//           printf("%f ", lon_vec[i]);
 //   }
-//   
+//
 //   printf("\n ");
    
    	//return 0;
