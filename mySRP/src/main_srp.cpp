@@ -48,7 +48,7 @@ int main( int argc, const char * argv[] )
     
         argv[4] = "./";
     
-        argv[5] = ".";
+        argv[5] = "40,45";
     
         argv[6] ="180,181";
     

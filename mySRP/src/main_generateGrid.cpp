@@ -1,5 +1,7 @@
+#include <stdio.h>
 #include <iostream>
 #include <vector>
+
 using namespace std;
 
 
@@ -28,7 +30,111 @@ void output(FILE* pf, double data[181][361])
 }
 
 
-void readData(std::string dataPath,double data_x[181][361], double data_y[181][361], double data_z[181][361])
+//void getFiles( string path, vector<string>& files )
+//{
+////文件句柄
+//long   hFile   =   0;
+////文件信息
+//struct _finddata_t fileinfo;
+//string p;
+//    if((hFile = _findfirst(p.assign(path).append("\\*").c_str(),&fileinfo)) !=  -1)
+//    {
+//        do
+//        {
+//         //如果是目录,迭代之
+//          //如果不是,加入列表
+//         if((fileinfo.attrib &  _A_SUBDIR))
+//          {
+//           if(strcmp(fileinfo.name,".") != 0  &&  strcmp(fileinfo.name,"..") != 0)
+//                    getFiles( p.assign(path).append("\\").append(fileinfo.name), files );
+//          }
+//        else
+//         {
+//           files.push_back(p.assign(path).append("\\").append(fileinfo.name) );
+//         }
+//      }while(_findnext(hFile, &fileinfo)  == 0);
+//           _findclose(hFile);
+//    }
+//}
+
+// the function that reads data files named with Longitude only
+void readData_v2(std::string dataPath,double data_x[181][361], double data_y[181][361], double data_z[181][361])
+{
+    
+    double lat = 0.0, lon = 0.0;
+    long ray_intersected, totalray;
+    double ratio,area_hit, pixelarray_x, pixelarray_y;
+    double x,y,z,magnitude;
+    bool copy_set = false; // 180 存在, -180不存在
+    std::vector<int> latitudes;
+    for( int j = 0 ; j<=360; j++ ) // from -180 to 180
+    {
+        std::string filename;
+        lon = double(j)-180.0;
+        char testFN[1024]={0};
+        sprintf(testFN, "LON%06.2f.txt",lon);
+        //printf("%s\n", testFN);
+        filename = testFN;
+        filename = dataPath + filename;
+        
+        FILE* pf = fopen(filename.c_str(),"r");
+        if(pf == NULL )
+        {
+            if(lon==180)
+            {
+                copy_set = true;
+            }
+            printf("WARNING data file %s open failed\n", filename.c_str());
+            continue;
+        }
+        
+        //ignore the first line
+        fgets(testFN,1024,pf);
+        
+        while(fgets(testFN,sizeof(char)*1024, pf))
+        {
+            sscanf(testFN, "%lf %lf %ld %ld %lf %lf %lf %lf %lf %lf %lf %lf\n",
+                   &lat,&lon, &ray_intersected,&totalray,&ratio,&area_hit,&pixelarray_x,&pixelarray_y,
+                   &x,&y,&z,&magnitude
+                   );
+            
+            latitudes.push_back(int(lat));
+            
+            //printf("%lf %lf\n", lat, lon);
+            int lat_index = lat + 90;
+            data_x[lat_index][j] = x;
+            data_y[lat_index][j] = y;
+            data_z[lat_index][j] = z;
+        }
+        
+        
+        fclose(pf);
+    }
+    
+    
+    // for longitude 180, should be the same as -180
+    for(int k = 0 ; k< latitudes.size(); k++ )
+    {
+        int lat_index = latitudes[k] + 90;
+        if(copy_set == true) // -180 存在, 180不存在
+        {
+            data_x[lat_index][360] = data_x[lat_index][0];
+            data_y[lat_index][360] = data_y[lat_index][0];
+            data_z[lat_index][360] = data_z[lat_index][0];
+        }
+        else if(copy_set==false) // 180 存在, -180不存在
+        {
+            data_x[lat_index][0] = data_x[lat_index][360];
+            data_y[lat_index][0] = data_y[lat_index][360];
+            data_z[lat_index][0] = data_z[lat_index][360];
+        }
+        
+    }
+}
+
+// read in the output files named with both Longitude and Latitude
+// There is only one record inside these output files
+void readData_v1(std::string dataPath,double data_x[181][361], double data_y[181][361], double data_z[181][361])
 {
 	double lat = 0.0, lon = 0.0;
 	long ray_intersected, totalray;
@@ -39,9 +145,9 @@ void readData(std::string dataPath,double data_x[181][361], double data_y[181][3
 		lat = i - 90;
 		for( int j = 0 ; j<=360; j++ ) // form -180 to 180
 		{
-			lon = j -180;
+        lon = j -180;
 			
-			char testFN[1024]={0};
+        char testFN[1024]={0};
     	sprintf(testFN, "LAT%06.2fLON%06.2f.txt",lat,lon);
     	//printf("%s\n", testFN);
     	std::string filename = testFN;
@@ -70,6 +176,10 @@ void readData(std::string dataPath,double data_x[181][361], double data_y[181][3
 		}
 	}
 	
+    
+    
+    
+    
 }
 
 
@@ -80,7 +190,7 @@ int main(int argc, char* argv[])
 	double data_z[181][361]={{0.0}}; //latitude from -90-90, longitude from 0-360
 	
  std::string dataPath(argv[1]);   //"galileoFOC/";
- readData(dataPath,data_x,  data_y, data_z);
+ readData_v2(dataPath,data_x,  data_y, data_z);
  
  //printf("read good\n");
  	
