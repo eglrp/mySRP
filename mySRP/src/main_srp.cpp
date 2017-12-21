@@ -52,17 +52,23 @@ int main( int argc, const char * argv[] )
     
         argv[6] ="180,181";
     
+    printf("***********************************************************************************\n");
+    printf("Complex Space Crafts Solar Radiation Pressure Force Modelling software\n");
+    printf("Author: Li Zhen (hpulizhen@163.com)\n");
+    printf("***********************************************************************************\n");
     
+    printf("software running configure\n");
     printf("spacecraft description file:  %s\n", argv[1]);
     printf("maximum reflection number:  %s\n", argv[2]);
     printf("pixel array resolution:  %s\n", argv[3]);
     printf("output file path:  %s\n", argv[4]);
     printf("latitudes:  %s\n", argv[5]);
-    printf("longitudes:  %s\n", argv[6]);
-      
+    printf("longitudes:  %s\n\n", argv[6]);
+    
+    printf("running logs\n");
     //std::vector<std::string> test=split("24", ",");
     	
-    	//printf("test: %s\n",test[0].c_str());
+    //printf("test: %s\n",test[0].c_str());
     
     //argv[1] is the spacecraft description file
     //argv[2] is the maximum depth
