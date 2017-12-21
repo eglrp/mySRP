@@ -222,7 +222,13 @@ int main(int argc, char* argv[])
  FILE* zgrid = fopen(zpath.c_str(),"w+");
  output(zgrid, data_z);
  fclose(zgrid);
-			
+
+ printf("GRID file generated successfully!\n");
+ printf("%s\n",xpath.c_str());
+ printf("%s\n",ypath.c_str());
+ printf("%s\n",zpath.c_str());
+    
+    
 }
 
 //
