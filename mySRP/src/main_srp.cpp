@@ -48,9 +48,9 @@ int main( int argc, const char * argv[] )
     
         argv[4] = "./";
     
-        argv[5] = "12,34";
+        argv[5] = ".";
     
-        argv[6] =".";
+        argv[6] ="180,181";
     
     
       printf("avgv[1]:  %s\n", argv[1]);
@@ -170,42 +170,45 @@ int main( int argc, const char * argv[] )
     
     double t0 = clock();
     
-    printf("lat lon ray_intersected totalRay ratio area_hit pixelarray_x pixelarray_y x y z magnitude\n");
+    //printf("lat lon ray_intersected totalRay ratio area_hit pixelarray_x pixelarray_y x y z magnitude\n");
     
-    for(int i = 0 ; i< lat_vec.size(); i++)
+    for(int j = 0 ; j< lon_vec.size(); j++)
     {
-    	for(int j = 0 ; j< lon_vec.size(); j++)
+        lon = lon_vec[j];
+        char testFN[1024]={0};
+        sprintf(testFN, "LON%06.2f.txt",lon);
+        std::string filename(testFN);
+        std::string outputFN=filepath;
+        outputFN = outputFN + filename;
+        //printf("filename: %s\n", outputFN.c_str());
+        FILE* output = fopen(outputFN.c_str(),"w+");
+        //std::ofstream output(outputFN);
+        if(!output)
+        {
+            printf("the output file failed %s \n", outputFN.c_str());
+            return 0;
+        }
+        
+        fprintf(output,"lat lon ray_intersected totalRay ratio area_hit pixelarray_x pixelarray_y x y z magnitude\n");
+    	
+        std::string outputStr;
+        
+        printf("computing Longitude: %3.2f\n",lon);
+        
+        for(int i = 0 ; i< lat_vec.size(); i++)
     	{
-    		lat = lat_vec[i];
-    		lon = lon_vec[j];
-    		char testFN[1024]={0};
-    		sprintf(testFN, "LAT%06.2fLON%06.2f.txt",lat,lon);
-    		std::string filename(testFN);
-    		std::string outputFN=filepath;
-    		outputFN = outputFN + filename;	
-    		//printf("filename: %s\n", outputFN.c_str());
-    		FILE* output = fopen(outputFN.c_str(),"w+");		
-    		//std::ofstream output(outputFN);
-    		if(!output) 
-    		{
-    			printf("the output file failed\n");
-    			return 0;
-    		}
-    		
+            
+            lat = lat_vec[i];
     		double lon_rad = lon*M_PI/180.0;
     		double lat_rad = lat*M_PI/180.0;
     		
-    		
-    		fprintf(output,"lat lon ray_intersected totalRay ratio area_hit pixelarray_x pixelarray_y x y z magnitude\n");
-    
-
     		myraytracer.rayIntersected = 0;
     		myraytracer.area_hit = 0.0;
         
     		myraytracer.pixelarray.buildPixelArray(lat_rad, lon_rad, myraytracer.objects.boundingBox);
         
     		GVector force = myraytracer.run();
-        
+            /*
     		printf("%.3f %.3f %ld %lu %f %f %.3f %.3f  %.16E  %.16E  %.16E  %.16E\n", lat, lon,
                myraytracer.rayIntersected ,
                myraytracer.pixelarray.totalRay,
@@ -214,28 +217,41 @@ int main( int argc, const char * argv[] )
                myraytracer.pixelarray.len_x,
                myraytracer.pixelarray.len_y,
                force.x, force.y, force.z, force.norm());
-       
-    					fprintf(output,"%.3f %.3f %ld %lu %f %f %.3f %.3f  %.16E  %.16E %.16E   %.16E\n",
-       												lat, lon,
-       												myraytracer.rayIntersected ,
-               								myraytracer.pixelarray.totalRay,
-               								double(myraytracer.rayIntersected)/myraytracer.pixelarray.totalRay,
-               								myraytracer.area_hit,
-               								myraytracer.pixelarray.len_x,
-               								myraytracer.pixelarray.len_y,
-               								force.x, force.y, force.z, force.norm()
-       							);
-       
-        
-    					if(output != NULL)
-   						{
-   		 					fclose(output);
-   		 					output = NULL;
-    					}
-    		
-    		
-    			
+             */
+            
+            
+            char buffer[1024]={0};
+            sprintf(buffer,"%.3f %.3f %ld %lu %f %f %.3f %.3f  %.16E  %.16E %.16E   %.16E\n",
+                    lat, lon,myraytracer.rayIntersected ,myraytracer.pixelarray.totalRay,
+                    double(myraytracer.rayIntersected)/myraytracer.pixelarray.totalRay,
+                    myraytracer.area_hit,
+                    myraytracer.pixelarray.len_x,
+                    myraytracer.pixelarray.len_y,
+                    force.x, force.y, force.z, force.norm()
+                    );
+            
+            outputStr += buffer;
+            
+            /*
+            fprintf(output,"%.3f %.3f %ld %lu %f %f %.3f %.3f  %.16E  %.16E %.16E   %.16E\n",
+                            lat, lon,myraytracer.rayIntersected ,myraytracer.pixelarray.totalRay,
+                            double(myraytracer.rayIntersected)/myraytracer.pixelarray.totalRay,
+                            myraytracer.area_hit,
+                            myraytracer.pixelarray.len_x,
+                            myraytracer.pixelarray.len_y,
+                            force.x, force.y, force.z, force.norm()
+                    );
+             */
+            
     	}
+        
+        fprintf(output,"%s\n",outputStr.c_str());
+        if(output != NULL)
+        {
+            fclose(output);
+            output = NULL;
+        }
+        
     }
     
     

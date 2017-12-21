@@ -57,7 +57,7 @@ void GScene::loadUserfile(std::string filename)
     if(infile.fail())
     {
         printf("the UCL userfile open failed!\n");
-        return;
+        exit(0);
     }
     
     int charsize = 1024;
