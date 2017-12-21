@@ -87,12 +87,13 @@ void readData_v2(std::string dataPath,double data_x[181][361], double data_y[181
             printf("WARNING data file %s open failed\n", filename.c_str());
             continue;
         }
-        
+        latitudes.clear();
         //ignore the first line
         fgets(testFN,1024,pf);
         
         while(fgets(testFN,sizeof(char)*1024, pf))
         {
+            
             sscanf(testFN, "%lf %lf %ld %ld %lf %lf %lf %lf %lf %lf %lf %lf\n",
                    &lat,&lon, &ray_intersected,&totalray,&ratio,&area_hit,&pixelarray_x,&pixelarray_y,
                    &x,&y,&z,&magnitude
@@ -185,6 +186,9 @@ void readData_v1(std::string dataPath,double data_x[181][361], double data_y[181
 
 int main(int argc, char* argv[])
 {
+    
+    //argv[1]="./";
+    //argv[2]="test";
 	double data_x[181][361]={{0.0}}; //latitude from -90-90, longitude from 0-360
 	double data_y[181][361]={{0.0}}; //latitude from -90-90, longitude from 0-360
 	double data_z[181][361]={{0.0}}; //latitude from -90-90, longitude from 0-360

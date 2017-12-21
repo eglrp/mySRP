@@ -48,9 +48,9 @@ int main( int argc, const char * argv[] )
     
         argv[4] = "./";
     
-        argv[5] = "40,45";
-    
-        argv[6] ="180,181";
+        argv[5] = ".";
+        
+        argv[6] ="180,179,-179";
     
     printf("***********************************************************************************\n");
     printf("Complex Space Crafts Solar Radiation Pressure Force Modelling software\n");
@@ -225,7 +225,7 @@ int main( int argc, const char * argv[] )
             
             
             char buffer[1024]={0};
-            sprintf(buffer,"%.3f %.3f %ld %lu %f %f %.3f %.3f  %.16E  %.16E %.16E   %.16E\n",
+            sprintf(buffer,"%.3f %.3f %ld %lu %f %f %.3f %.3f %.16E %.16E %.16E %.16E\n",
                     lat, lon,myraytracer.rayIntersected ,myraytracer.pixelarray.totalRay,
                     double(myraytracer.rayIntersected)/myraytracer.pixelarray.totalRay,
                     myraytracer.area_hit,
@@ -249,7 +249,7 @@ int main( int argc, const char * argv[] )
             
     	}
         
-        fprintf(output,"%s\n",outputStr.c_str());
+        fprintf(output,"%s",outputStr.c_str());
         if(output != NULL)
         {
             fclose(output);
