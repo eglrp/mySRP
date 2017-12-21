@@ -7,7 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B7CD6DEC1FEBC82900DBA29C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7CD6DEB1FEBC82900DBA29C /* main.cpp */; };
+		B7CD6E121FEBC88200DBA29C /* main_srp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7CD6DF41FEBC87F00DBA29C /* main_srp.cpp */; };
+		B7CD6E131FEBC88200DBA29C /* GVector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7CD6DF51FEBC87F00DBA29C /* GVector.cpp */; };
+		B7CD6E141FEBC88200DBA29C /* GSphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7CD6DF61FEBC87F00DBA29C /* GSphere.cpp */; };
+		B7CD6E151FEBC88200DBA29C /* GCylinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7CD6DF71FEBC87F00DBA29C /* GCylinder.cpp */; };
+		B7CD6E161FEBC88200DBA29C /* GDisc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7CD6DF81FEBC87F00DBA29C /* GDisc.cpp */; };
+		B7CD6E171FEBC88200DBA29C /* GGeometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7CD6DFA1FEBC87F00DBA29C /* GGeometry.cpp */; };
+		B7CD6E181FEBC88200DBA29C /* GParaboloid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7CD6DFB1FEBC87F00DBA29C /* GParaboloid.cpp */; };
+		B7CD6E191FEBC88200DBA29C /* GScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7CD6DFE1FEBC87F00DBA29C /* GScene.cpp */; };
+		B7CD6E1A1FEBC88200DBA29C /* GBoundingBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7CD6DFF1FEBC87F00DBA29C /* GBoundingBox.cpp */; };
+		B7CD6E1C1FEBC88200DBA29C /* GKDTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7CD6E031FEBC88000DBA29C /* GKDTree.cpp */; };
+		B7CD6E1D1FEBC88200DBA29C /* GRayTracer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7CD6E041FEBC88000DBA29C /* GRayTracer.cpp */; };
+		B7CD6E1E1FEBC88200DBA29C /* GPolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7CD6E061FEBC88000DBA29C /* GPolygon.cpp */; };
+		B7CD6E1F1FEBC88200DBA29C /* GPixelArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7CD6E071FEBC88000DBA29C /* GPixelArray.cpp */; };
+		B7CD6E211FEBC88200DBA29C /* GCone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7CD6E0E1FEBC88100DBA29C /* GCone.cpp */; };
+		B7CD6E221FEBC88200DBA29C /* GRing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7CD6E101FEBC88100DBA29C /* GRing.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +38,36 @@
 
 /* Begin PBXFileReference section */
 		B7CD6DE81FEBC82900DBA29C /* mySRP */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = mySRP; sourceTree = BUILT_PRODUCTS_DIR; };
-		B7CD6DEB1FEBC82900DBA29C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		B7CD6DF21FEBC87F00DBA29C /* GRayTracer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GRayTracer.hpp; sourceTree = "<group>"; };
+		B7CD6DF31FEBC87F00DBA29C /* GCylinder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GCylinder.hpp; sourceTree = "<group>"; };
+		B7CD6DF41FEBC87F00DBA29C /* main_srp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main_srp.cpp; sourceTree = "<group>"; };
+		B7CD6DF51FEBC87F00DBA29C /* GVector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GVector.cpp; sourceTree = "<group>"; };
+		B7CD6DF61FEBC87F00DBA29C /* GSphere.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GSphere.cpp; sourceTree = "<group>"; };
+		B7CD6DF71FEBC87F00DBA29C /* GCylinder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GCylinder.cpp; sourceTree = "<group>"; };
+		B7CD6DF81FEBC87F00DBA29C /* GDisc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GDisc.cpp; sourceTree = "<group>"; };
+		B7CD6DF91FEBC87F00DBA29C /* GGeometry.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GGeometry.hpp; sourceTree = "<group>"; };
+		B7CD6DFA1FEBC87F00DBA29C /* GGeometry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GGeometry.cpp; sourceTree = "<group>"; };
+		B7CD6DFB1FEBC87F00DBA29C /* GParaboloid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GParaboloid.cpp; sourceTree = "<group>"; };
+		B7CD6DFC1FEBC87F00DBA29C /* GRay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRay.h; sourceTree = "<group>"; };
+		B7CD6DFD1FEBC87F00DBA29C /* GPixelArray.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GPixelArray.hpp; sourceTree = "<group>"; };
+		B7CD6DFE1FEBC87F00DBA29C /* GScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GScene.cpp; sourceTree = "<group>"; };
+		B7CD6DFF1FEBC87F00DBA29C /* GBoundingBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GBoundingBox.cpp; sourceTree = "<group>"; };
+		B7CD6E001FEBC88000DBA29C /* GPolygon.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GPolygon.hpp; sourceTree = "<group>"; };
+		B7CD6E021FEBC88000DBA29C /* GScene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GScene.hpp; sourceTree = "<group>"; };
+		B7CD6E031FEBC88000DBA29C /* GKDTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GKDTree.cpp; sourceTree = "<group>"; };
+		B7CD6E041FEBC88000DBA29C /* GRayTracer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GRayTracer.cpp; sourceTree = "<group>"; };
+		B7CD6E051FEBC88000DBA29C /* GBoundingBox.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GBoundingBox.hpp; sourceTree = "<group>"; };
+		B7CD6E061FEBC88000DBA29C /* GPolygon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GPolygon.cpp; sourceTree = "<group>"; };
+		B7CD6E071FEBC88000DBA29C /* GPixelArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GPixelArray.cpp; sourceTree = "<group>"; };
+		B7CD6E081FEBC88000DBA29C /* GSphere.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GSphere.hpp; sourceTree = "<group>"; };
+		B7CD6E091FEBC88100DBA29C /* GVector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GVector.hpp; sourceTree = "<group>"; };
+		B7CD6E0B1FEBC88100DBA29C /* GDisc.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GDisc.hpp; sourceTree = "<group>"; };
+		B7CD6E0C1FEBC88100DBA29C /* GRing.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GRing.hpp; sourceTree = "<group>"; };
+		B7CD6E0D1FEBC88100DBA29C /* GKDTree.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GKDTree.hpp; sourceTree = "<group>"; };
+		B7CD6E0E1FEBC88100DBA29C /* GCone.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GCone.cpp; sourceTree = "<group>"; };
+		B7CD6E0F1FEBC88100DBA29C /* GParaboloid.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GParaboloid.hpp; sourceTree = "<group>"; };
+		B7CD6E101FEBC88100DBA29C /* GRing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GRing.cpp; sourceTree = "<group>"; };
+		B7CD6E111FEBC88200DBA29C /* GCone.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GCone.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +100,36 @@
 		B7CD6DEA1FEBC82900DBA29C /* mySRP */ = {
 			isa = PBXGroup;
 			children = (
-				B7CD6DEB1FEBC82900DBA29C /* main.cpp */,
+				B7CD6DFF1FEBC87F00DBA29C /* GBoundingBox.cpp */,
+				B7CD6E051FEBC88000DBA29C /* GBoundingBox.hpp */,
+				B7CD6E0E1FEBC88100DBA29C /* GCone.cpp */,
+				B7CD6E111FEBC88200DBA29C /* GCone.hpp */,
+				B7CD6DF71FEBC87F00DBA29C /* GCylinder.cpp */,
+				B7CD6DF31FEBC87F00DBA29C /* GCylinder.hpp */,
+				B7CD6DF81FEBC87F00DBA29C /* GDisc.cpp */,
+				B7CD6E0B1FEBC88100DBA29C /* GDisc.hpp */,
+				B7CD6DFA1FEBC87F00DBA29C /* GGeometry.cpp */,
+				B7CD6DF91FEBC87F00DBA29C /* GGeometry.hpp */,
+				B7CD6E031FEBC88000DBA29C /* GKDTree.cpp */,
+				B7CD6E0D1FEBC88100DBA29C /* GKDTree.hpp */,
+				B7CD6DFB1FEBC87F00DBA29C /* GParaboloid.cpp */,
+				B7CD6E0F1FEBC88100DBA29C /* GParaboloid.hpp */,
+				B7CD6E071FEBC88000DBA29C /* GPixelArray.cpp */,
+				B7CD6DFD1FEBC87F00DBA29C /* GPixelArray.hpp */,
+				B7CD6E061FEBC88000DBA29C /* GPolygon.cpp */,
+				B7CD6E001FEBC88000DBA29C /* GPolygon.hpp */,
+				B7CD6DFC1FEBC87F00DBA29C /* GRay.h */,
+				B7CD6E041FEBC88000DBA29C /* GRayTracer.cpp */,
+				B7CD6DF21FEBC87F00DBA29C /* GRayTracer.hpp */,
+				B7CD6E101FEBC88100DBA29C /* GRing.cpp */,
+				B7CD6E0C1FEBC88100DBA29C /* GRing.hpp */,
+				B7CD6DFE1FEBC87F00DBA29C /* GScene.cpp */,
+				B7CD6E021FEBC88000DBA29C /* GScene.hpp */,
+				B7CD6DF61FEBC87F00DBA29C /* GSphere.cpp */,
+				B7CD6E081FEBC88000DBA29C /* GSphere.hpp */,
+				B7CD6DF51FEBC87F00DBA29C /* GVector.cpp */,
+				B7CD6E091FEBC88100DBA29C /* GVector.hpp */,
+				B7CD6DF41FEBC87F00DBA29C /* main_srp.cpp */,
 			);
 			path = mySRP;
 			sourceTree = "<group>";
@@ -119,7 +191,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B7CD6DEC1FEBC82900DBA29C /* main.cpp in Sources */,
+				B7CD6E1A1FEBC88200DBA29C /* GBoundingBox.cpp in Sources */,
+				B7CD6E191FEBC88200DBA29C /* GScene.cpp in Sources */,
+				B7CD6E131FEBC88200DBA29C /* GVector.cpp in Sources */,
+				B7CD6E1D1FEBC88200DBA29C /* GRayTracer.cpp in Sources */,
+				B7CD6E161FEBC88200DBA29C /* GDisc.cpp in Sources */,
+				B7CD6E141FEBC88200DBA29C /* GSphere.cpp in Sources */,
+				B7CD6E211FEBC88200DBA29C /* GCone.cpp in Sources */,
+				B7CD6E171FEBC88200DBA29C /* GGeometry.cpp in Sources */,
+				B7CD6E1C1FEBC88200DBA29C /* GKDTree.cpp in Sources */,
+				B7CD6E121FEBC88200DBA29C /* main_srp.cpp in Sources */,
+				B7CD6E181FEBC88200DBA29C /* GParaboloid.cpp in Sources */,
+				B7CD6E221FEBC88200DBA29C /* GRing.cpp in Sources */,
+				B7CD6E151FEBC88200DBA29C /* GCylinder.cpp in Sources */,
+				B7CD6E1F1FEBC88200DBA29C /* GPixelArray.cpp in Sources */,
+				B7CD6E1E1FEBC88200DBA29C /* GPolygon.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
