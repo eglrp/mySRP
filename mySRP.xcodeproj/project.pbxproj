@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B733FC3820232A40000480D6 /* main_srp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B733FC3720232A40000480D6 /* main_srp.cpp */; };
+		B733FC3C20232D4A000480D6 /* main_srp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B733FC3B20232D4A000480D6 /* main_srp.cpp */; };
 		B7CD6E761FEBD0B500DBA29C /* GKDTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7CD6E571FEBD0B300DBA29C /* GKDTree.cpp */; };
 		B7CD6E771FEBD0B500DBA29C /* GPixelArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7CD6E581FEBD0B300DBA29C /* GPixelArray.cpp */; };
 		B7CD6E781FEBD0B500DBA29C /* GDisc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7CD6E591FEBD0B300DBA29C /* GDisc.cpp */; };
@@ -38,7 +38,7 @@
 
 /* Begin PBXFileReference section */
 		B733FC36202329ED000480D6 /* GVector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = GVector.hpp; path = mySRP/src/GVector.hpp; sourceTree = SOURCE_ROOT; };
-		B733FC3720232A40000480D6 /* main_srp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main_srp.cpp; path = src/main_srp.cpp; sourceTree = "<group>"; };
+		B733FC3B20232D4A000480D6 /* main_srp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main_srp.cpp; path = src/main_srp.cpp; sourceTree = "<group>"; };
 		B7CD6DE81FEBC82900DBA29C /* mySRP */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = mySRP; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7CD6E561FEBD0B300DBA29C /* GDisc.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = GDisc.hpp; path = mySRP/src/GDisc.hpp; sourceTree = SOURCE_ROOT; };
 		B7CD6E571FEBD0B300DBA29C /* GKDTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GKDTree.cpp; path = mySRP/src/GKDTree.cpp; sourceTree = SOURCE_ROOT; };
@@ -100,7 +100,7 @@
 		B7CD6DEA1FEBC82900DBA29C /* mySRP */ = {
 			isa = PBXGroup;
 			children = (
-				B733FC3720232A40000480D6 /* main_srp.cpp */,
+				B733FC3B20232D4A000480D6 /* main_srp.cpp */,
 				B7CD6E231FEBCBC800DBA29C /* src */,
 			);
 			path = mySRP;
@@ -200,13 +200,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B733FC3820232A40000480D6 /* main_srp.cpp in Sources */,
 				B7CD6E7E1FEBD0B500DBA29C /* GGeometry.cpp in Sources */,
 				B7CD6E7B1FEBD0B500DBA29C /* GCone.cpp in Sources */,
 				B7CD6E841FEBD0B500DBA29C /* GRing.cpp in Sources */,
 				B7CD6E7A1FEBD0B500DBA29C /* GParaboloid.cpp in Sources */,
 				B7CD6E811FEBD0B500DBA29C /* GBoundingBox.cpp in Sources */,
 				B7CD6E821FEBD0B500DBA29C /* GVector.cpp in Sources */,
+				B733FC3C20232D4A000480D6 /* main_srp.cpp in Sources */,
 				B7CD6E7F1FEBD0B500DBA29C /* GRayTracer.cpp in Sources */,
 				B7CD6E781FEBD0B500DBA29C /* GDisc.cpp in Sources */,
 				B7CD6E7C1FEBD0B500DBA29C /* GScene.cpp in Sources */,
