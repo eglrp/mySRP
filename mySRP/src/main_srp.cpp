@@ -40,17 +40,17 @@ int main( int argc, const char * argv[] )
       
     
         // test main function parameters
-       // argv[1] = "GPSIIR_NONAP.txt";
+        argv[1] = "GPSIIR_NONAP.txt";
     
-       // argv[2] = "1";
+        argv[2] = "1";
     
-       // argv[3] = "0.01";
+        argv[3] = "0.0025";
     
-       // argv[4] = "./";
+        argv[4] = "./";
     
-       // argv[5] = ".";
+        argv[5] = "30";  // "."
         
-      //  argv[6] ="180,179,-179";
+        argv[6] ="180";
     
     printf("***********************************************************************************\n");
     printf("Complex Space Crafts Solar Radiation Pressure Force Modelling software\n");
