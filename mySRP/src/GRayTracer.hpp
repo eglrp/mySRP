@@ -52,27 +52,35 @@ public:
     
     std::vector<GVector> intersectionPoints;
     
+    // the covariance matrix
+    double covariance[9];
     
     GRayTracer()
     {
         rayIntersected = 0;
         area_hit = 0.0;
         intersectionPoints.reserve(20000);
+        memset(covariance,0,sizeof(double)*9);
     }
     
     void makeTree();
     
     int intersect(GRay& ray,GVector& intersection, GVector& normal, GOpticalProperty& op);
     
-    void raytracing(GRay& ray, GVector& force);
+    void raytracing(GRay& ray, GVector& force,double cov[9]);
     
     // the solar radiaiton pressure calculation
-    GVector processor(GRay& ray, GVector& normal , GVector& reflectionDirection,GOpticalProperty& op);
+    GVector processor(GRay& ray, GVector& normal , GVector& reflectionDirection,GOpticalProperty& op,double cc[9]);
                       //double specularity, double reflectivity, double emissivity, double absorptivity, int isMLI);
     
     //the function to deal with only solar radiation pressure
     GVector SRP(GRay& ray, GVector& normal , GVector& reflectionDirection,
                          double specularity, double reflectivity);
+    
+    void SRP_cov(GRay& ray, GVector& normal , GVector& reflectionDirection,
+                 double specularity, double reflectivity,
+                 double specularity_cov, double reflectivity_cov,
+                 double cc[9]);
     
     // the thermal reradiaiton pressure calculation
     void TRR_MLI( GRay& ray, GVector& normal,double emissivity, double abosrbtivity,GVector& force);

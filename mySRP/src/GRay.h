@@ -61,37 +61,37 @@ class GOpticalProperty
 public:
     
     // the default standard deviation of the optical properties
-    static double default_std ;
+    static double default_cov ;
     
     // for all the radiation spectrum
     double solar_absorptivity;
-    double solar_absorptivity_std; // the uncertainty of optical property
+    double solar_absorptivity_cov; // the uncertainty of optical property
     
     double solar_reflectivity;
-    double solar_reflectivity_std;
+    double solar_reflectivity_cov;
     
     double solar_specularity;
-    double solar_specularity_std;
+    double solar_specularity_cov;
     
     double solar_emissivity;
-    double solar_emissivity_std;
+    double solar_emissivity_cov;
     
     
     
     // for the infrared radiation spectrum
     double ir_absorptivity;
-    double ir_absorptivity_std;
+    double ir_absorptivity_cov;
     
     double ir_reflectivity;
-    double ir_reflectivity_std;
+    double ir_reflectivity_cov;
     
     
     double ir_specularity;
-    double ir_specularity_std;
+    double ir_specularity_cov;
     
     
     double ir_emissivity;
-    double ir_emissivity_std;
+    double ir_emissivity_cov;
     
     
     int    mli_type;   // the type of the mli, 0= not mli, 1 for the first mli, 2 for the second mli and so forth
@@ -107,15 +107,15 @@ public:
         ir_absorptivity = 0.0;
         ir_reflectivity = 0.0;
         
-        solar_emissivity_std = default_std;
-        solar_specularity_std = default_std;
-        solar_absorptivity_std = default_std;
-        solar_reflectivity_std = default_std;
+        solar_emissivity_cov = default_cov;
+        solar_specularity_cov = default_cov;
+        solar_absorptivity_cov = default_cov;
+        solar_reflectivity_cov = default_cov;
         
-        ir_emissivity_std = default_std;
-        ir_specularity_std = default_std;
-        ir_absorptivity_std = default_std;
-        ir_reflectivity_std = default_std;
+        ir_emissivity_cov = default_cov;
+        ir_specularity_cov = default_cov;
+        ir_absorptivity_cov = default_cov;
+        ir_reflectivity_cov = default_cov;
         
         mli_type = 0;
     }

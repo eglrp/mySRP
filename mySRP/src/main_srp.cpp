@@ -40,11 +40,11 @@ int main( int argc, const char * argv[] )
       
     
         // test main function parameters
-        argv[1] = "GPSIIR_NONAP.txt";
+        argv[1] = "GalileoIOV.txt";  //GalileoIOV.txt  GPSIIR_NONAP.txt
     
         argv[2] = "1";
     
-        argv[3] = "0.0025";
+        argv[3] = "0.01";
     
         argv[4] = "./";
     
@@ -212,27 +212,47 @@ int main( int argc, const char * argv[] )
     		myraytracer.pixelarray.buildPixelArray(lat_rad, lon_rad, myraytracer.objects.boundingBox);
         
     		GVector force = myraytracer.run();
-            /*
-    		printf("%.3f %.3f %ld %lu %f %f %.3f %.3f  %.16E  %.16E  %.16E  %.16E\n", lat, lon,
+            
+    		printf("%.3f %.3f %ld %lu %f %f %.3f %.3f  %.16E  %.16E  %.16E  %.16E %.16E %.16E %.16E %.16E %.16E %.16E %.16E %.16E %.16E\n", lat, lon,
                myraytracer.rayIntersected ,
                myraytracer.pixelarray.totalRay,
                double(myraytracer.rayIntersected)/myraytracer.pixelarray.totalRay,
                myraytracer.area_hit,
                myraytracer.pixelarray.len_x,
                myraytracer.pixelarray.len_y,
-               force.x, force.y, force.z, force.norm());
-             */
+               force.x, force.y, force.z, force.norm(),
+               myraytracer.covariance[0], myraytracer.covariance[1],myraytracer.covariance[2],
+               myraytracer.covariance[3],myraytracer.covariance[4],myraytracer.covariance[5],
+               myraytracer.covariance[6],myraytracer.covariance[7],myraytracer.covariance[8]
+                   );
+            
             
             
             char buffer[1024]={0};
-            sprintf(buffer,"%.3f %.3f %ld %lu %f %f %.3f %.3f %.16E %.16E %.16E %.16E\n",
+            //output without covariance
+//            sprintf(buffer,"%.3f %.3f %ld %lu %f %f %.3f %.3f %.16E %.16E %.16E %.16E\n",
+//                    lat, lon,myraytracer.rayIntersected ,myraytracer.pixelarray.totalRay,
+//                    double(myraytracer.rayIntersected)/myraytracer.pixelarray.totalRay,
+//                    myraytracer.area_hit,
+//                    myraytracer.pixelarray.len_x,
+//                    myraytracer.pixelarray.len_y,
+//                    force.x, force.y, force.z, force.norm()
+//                    );
+            
+            // output with covariance
+            sprintf(buffer,"%.3f %.3f %ld %lu %f %f %.3f %.3f %.16E %.16E %.16E %.16E %.16E %.16E %.16E %.16E %.16E %.16E %.16E %.16E %.16E\n",
                     lat, lon,myraytracer.rayIntersected ,myraytracer.pixelarray.totalRay,
                     double(myraytracer.rayIntersected)/myraytracer.pixelarray.totalRay,
                     myraytracer.area_hit,
                     myraytracer.pixelarray.len_x,
                     myraytracer.pixelarray.len_y,
-                    force.x, force.y, force.z, force.norm()
+                    force.x, force.y, force.z, force.norm(),
+                    myraytracer.covariance[0], myraytracer.covariance[1],myraytracer.covariance[2],
+                    myraytracer.covariance[3],myraytracer.covariance[4],myraytracer.covariance[5],
+                    myraytracer.covariance[6],myraytracer.covariance[7],myraytracer.covariance[8]
                     );
+            
+            
             
             outputStr += buffer;
             

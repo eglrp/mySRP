@@ -15,7 +15,7 @@ double GGeometry::EPS = 1.0E-12;  // the EPS value, probably it is enough
 double GGeometry::BoundingLimit = 0.001; // the default minimum value for the bounding box of plane
 
 // the default standard deviation of the optical properties
-double  GOpticalProperty::default_std  = 0.1;
+double  GOpticalProperty::default_cov  = 0.0001*0.0001;
 
 GGeometry::GGeometry()
 {

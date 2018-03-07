@@ -30,6 +30,47 @@ void GRayTracer::makeTree()
 }
 
 
+//calculate the uncertainty of the srp froce in ray tracing
+// the method is described briefly here
+// linearise the formular of the srp calculation
+// apply the error propagation law
+// for every ray, the covariance matrix is generated
+void GRayTracer::SRP_cov(GRay& ray, GVector& normal , GVector& reflectionDirection,
+                            double specularity, double reflectivity,
+                            double specularity_cov, double reflectivity_cov,
+                            double cc[9])
+{
+    double dUV = 0.0; // the co-variance betweeen reflectiviy v and specularity u
+    
+    GVector dfdv = -reflectionDirection*specularity - 2.0/3.0*(1.0-specularity)*normal;
+    
+    GVector dfdu = -reflectionDirection*reflectivity + 2.0/3.0*reflectivity*normal;
+    
+    double tmp[6]={0.0}; // 3 by 2
+    
+    tmp[0] = dfdv.x * reflectivity_cov + dfdu.x * dUV;
+    tmp[1] = dfdv.x * dUV + dfdu.x * specularity_cov;
+    
+    tmp[2] = dfdv.y*reflectivity_cov + dfdu.y*dUV;
+    tmp[3] = dfdv.y*dUV + dfdu.y*specularity_cov;
+    
+    tmp[4] = dfdv.z*reflectivity_cov + dfdu.z*dUV;
+    tmp[5] = dfdv.z*dUV + dfdu.z*specularity_cov;
+    
+    cc[0] = tmp[0]*dfdv.x + tmp[1]*dfdu.x;
+    cc[1] = tmp[0]*dfdv.y + tmp[1]*dfdu.y;
+    cc[2] = tmp[0]*dfdv.z + tmp[1]*dfdu.z;
+    
+    cc[3] = tmp[2]*dfdv.x + tmp[3]*dfdu.x;
+    cc[4] = tmp[2]*dfdv.y + tmp[3]*dfdu.y;
+    cc[5] = tmp[2]*dfdv.z + tmp[3]*dfdu.z;
+    
+    cc[6] = tmp[4]*dfdv.x + tmp[5]*dfdu.x;
+    cc[7] = tmp[4]*dfdv.y + tmp[5]*dfdu.y;
+    cc[8] = tmp[4]*dfdv.z + tmp[5]*dfdu.z;
+    
+}
+
 //this funciton only deal with solar radiation pressure
 GVector GRayTracer::SRP(GRay& ray, GVector& normal , GVector& reflectionDirection,
                      double specularity, double reflectivity)
@@ -71,12 +112,14 @@ GVector GRayTracer::SRP(GRay& ray, GVector& normal , GVector& reflectionDirectio
  !!! the default solar flux is 1.0 here !!!
  the final result need to be factorized with AW/c
  */
-GVector GRayTracer::processor(GRay& ray, GVector& normal , GVector& reflectionDirection,GOpticalProperty& op)
+GVector GRayTracer::processor(GRay& ray, GVector& normal , GVector& reflectionDirection,GOpticalProperty& op, double cc[9])
                              // double specularity, double reflectivity, double emissivity, double absorptivity, int isMLI)
 {
     GVector srp(0,0,0), trr(0,0,0), force(0,0,0);
     
     srp = SRP(ray, normal, reflectionDirection, op.solar_specularity, op.solar_reflectivity);
+    
+    SRP_cov(ray, normal, reflectionDirection, op.solar_specularity, op.solar_reflectivity, op.solar_specularity_cov, op.solar_reflectivity_cov, cc);
     
     if(op.mli_type) // thermal response for the MLI material, only radiation, no conduction and convection
     {
@@ -250,13 +293,17 @@ int GRayTracer::intersect( GRay& ray,GVector& intersection, GVector& normal, GOp
  
  force is the final force for this ray after several reflection
  force need to be factorized with AW/c, because solar flux and area are both 1.0
+ 
+ the covariance matrix of the force f is a 3 by 3 matrix, it is the output
  */
-void GRayTracer::raytracing(GRay& ray, GVector& force)
+void GRayTracer::raytracing(GRay& ray, GVector& force, double cov[9])
 {
     
     int objectIndex = -1;
     GVector intersection, normal, reflectDirection;
     GOpticalProperty op;
+    // the covariance matrix
+    double cc[9] = {0.0};
     
     //it can be controlled by either the depth or the energy of the ray
     if( ray.reflectionNum >= GRayTracer::MAX_DEPTH )
@@ -302,7 +349,13 @@ void GRayTracer::raytracing(GRay& ray, GVector& force)
             // reflectDirection is a unit vector, do not have to be normalised, make it faster
             reflectDirection= -2.0*dotproduct(ray.direction, normal)*normal + ray.direction;
             
-            force += processor(ray, normal , reflectDirection,op);
+            force += processor(ray, normal , reflectDirection,op,cc);
+            
+            for(int i = 0 ; i< 9;i++)
+            {
+                cov[i] += cc[i];
+            }
+            
             
             ray.start = intersection;
             //set the direction of this ray to the reflected direction
@@ -324,7 +377,7 @@ void GRayTracer::raytracing(GRay& ray, GVector& force)
             area_hit += GPixelArray::pixelArea;
             
             //recursive call
-            raytracing(ray,force);
+            raytracing(ray,force,cov);
             
         }
         
@@ -344,6 +397,10 @@ GVector GRayTracer::run()
     GVector f;
     GVector force;
     GRay myray;
+    
+    // these are the first, second and third row of the covariance matrix of the final force
+    double c[9] = {0.0};
+    
     double coefficient = (GPixelArray::pixelArea*GRayTracer::SOLAR_CONST/GRayTracer::CLIGHT);
     int count = 0;
     //pixelarray.i_index = 0;
@@ -365,10 +422,17 @@ GVector GRayTracer::run()
         
         // has to be set to 0.0
         f.set(0.0, 0.0, 0.0);
+        memset(c,0,sizeof(double)*9);
         
-        raytracing(myray, f);
+        raytracing(myray, f, c);
         
         force += f;
+        
+        for(int i = 0 ; i< 9 ; i++ )
+        {
+            covariance[i] += c[i];
+        }
+        
         
         pixelarray.totalRay++;
         
@@ -450,6 +514,10 @@ GVector GRayTracer::run()
     // do the factorization
     force *= coefficient;
     
+    for(int i = 0 ; i< 9; i++)
+    {
+        covariance[i] *= coefficient;
+    }
     
     //after the ray tracing, add in the thermal effect of the MLI that are not illuminated by the sun
     
