@@ -168,7 +168,7 @@ void GPixelArray::buildPixelArray(double Lat, double Lon, GBoundingBox& aabb)
     
     num_x = int(len_x / GPixelArray::pixelSize)+2;
     num_y = int(len_y / GPixelArray::pixelSize)+2;
-    firstPixel = refpoint[0] + 0.5*GPixelArray::pixelSize*dx + 0.5*GPixelArray::pixelSize*dy;
+    firstPixel = refpoint[0] - 0.5*GPixelArray::pixelSize*dx - 0.5*GPixelArray::pixelSize*dy;
     
     
     /*
@@ -258,9 +258,9 @@ void GPixelArray::generateRays()
     rays.resize(num_x*num_y);
     
     int k =0; // the count of rays
-    for(int i = 0; i< num_x; i++ )
+    for(int i = 0; i<= num_x; i++ )
     {
-        for( int j = 0 ; j< num_y; j++ )
+        for( int j = 0 ; j<= num_y; j++ )
         {
             
             pixelPos = firstPixel + i*GPixelArray::pixelSize*dx + j*GPixelArray::pixelSize*dy ;
