@@ -3,20 +3,20 @@
 
 bin_srp=bin/srp
 bin_grid=bin/generateGrid
-resolution=0.01
+resolution=0.001
 depth=1
 currentDir=$PWD
 echo ${currentDir}
 
 
-outputpath=${currentDir}/testBox/
-userfile=${outputpath}testBox.txt
+outputpath=${currentDir}/GalileoFOC/
+userfile=${outputpath}GalileoFOC.txt
 
 ## just run it
 ## for GNSS attitude control, the longitude can only be -5 -4 -3 -2 -1 0 1 2 3 4 5 and 175 176 177 178 179 180 181 182 183 184 185
 #longitude=( 178 179 180 -179 -178 )
 
-longitude=( 180 179 178 )
+longitude=( 180 )
 #longitude=(.)
 len_lon=${#longitude[@]}
 
@@ -81,4 +81,4 @@ $bin_srp $userfile $depth $resolution $outputpath $lat $lon
 
 
 ##generate the grids
-$bin_grid $outputpath testBox
+$bin_grid $outputpath GalileoFOC

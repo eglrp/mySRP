@@ -61,6 +61,7 @@ class GOpticalProperty
 public:
     
     // the default standard deviation of the optical properties
+    //It is initilised in double GGeometry,  GOpticalProperty::default_cov  = 0.0001*0.0001;
     static double default_cov ;
     
     // for all the radiation spectrum
