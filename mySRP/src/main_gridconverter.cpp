@@ -14,7 +14,7 @@ void output(FILE* pf, double data[181][361])
 	fprintf(pf, "0.0 0.0\n" );
 	int kindex = 0;
 	int lat =0, lon = 0;
-	
+
 	for( int i = 0 ; i< 181; i++ ) // from -90 to 90
 	{
 
@@ -31,15 +31,15 @@ void output(FILE* pf, double data[181][361])
 int main(int argc, char* argv[])
 {
 
-std::string file_name = argv[1]; 
+std::string file_name = argv[1];
 double data[181][361]={0.0};
 
 std::ifstream grid_file(file_name);
-        
+
 if (grid_file.fail() || !grid_file.is_open())
 {
     std::cerr << "Error opening SRP grid file: " << file_name << std::endl;
-    return false;
+    return 0;
 }
 
 
@@ -48,11 +48,11 @@ printf("convert file name: %s\n", file_name.c_str());
 uint_fast16_t n_cols, n_rows; // no. of horizontal and vertical grid nodes.
 double min_lon, max_lon, min_lat, max_lat; // grid file ranges.
 double min_acc, max_acc;
-        
+
         // First header line:
 std::string scrap;
 getline(grid_file, scrap); // DSAA designation from Surfer6 format.
-        
+
         // Check grid resolution:
 grid_file >> n_cols;
 grid_file >> n_rows;

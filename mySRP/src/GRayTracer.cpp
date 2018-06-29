@@ -121,14 +121,14 @@ GVector GRayTracer::processor(GRay& ray, GVector& normal , GVector& reflectionDi
 
     //SRP_cov(ray, normal, reflectionDirection, op.solar_specularity, op.solar_reflectivity, op.solar_specularity_cov, op.solar_reflectivity_cov, cc);
 
-    // if(op.mli_type) // thermal response for the MLI material, only radiation, no conduction and convection
-    // {
-    //     TRR_MLI( ray, normal, op.ir_emissivity, op.solar_absorptivity,trr);
-    // }
-    // else // thermal response for the other kind of material, including radiation and conduction, no convection in space
-    // {
-    //
-    // }
+    if(op.mli_type) // thermal response for the MLI material, only radiation, no conduction and convection
+    {
+        TRR_MLI( ray, normal, op.ir_emissivity, op.solar_absorptivity,trr);
+    }
+    else // thermal response for the other kind of material, including radiation and conduction, no convection in space
+    {
+
+    }
 
     force = srp + trr;
 
