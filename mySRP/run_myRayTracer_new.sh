@@ -9,8 +9,11 @@ currentDir=$PWD
 echo ${currentDir}
 
 
-outputpath=${currentDir}/GalileoFOC/
-userfile=${outputpath}GalileoFOC.txt
+#outputpath=${currentDir}/GalileoIOV/
+#userfile=${outputpath}GalileoIOV.txt
+spacecraftName=$1
+outputpath=$2
+userfile=$3
 
 ## just run it
 ## for GNSS attitude control, the longitude can only be -5 -4 -3 -2 -1 0 1 2 3 4 5 and 175 176 177 178 179 180 181 182 183 184 185
@@ -81,4 +84,4 @@ $bin_srp $userfile $depth $resolution $outputpath $lat $lon
 
 
 ##generate the grids
-$bin_grid $outputpath GalileoFOC
+$bin_grid $outputpath ${spacecraftName}
