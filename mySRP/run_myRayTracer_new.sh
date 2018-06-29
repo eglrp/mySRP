@@ -4,7 +4,7 @@
 bin_srp=bin/srp
 bin_grid=bin/generateGrid
 resolution=0.001
-depth=1
+reflectionNum=1
 currentDir=$PWD
 echo ${currentDir}
 
@@ -14,6 +14,8 @@ echo ${currentDir}
 spacecraftName=$1
 outputpath=$2
 userfile=$3
+resolution=$4
+reflectionNum=$5
 
 ## just run it
 ## for GNSS attitude control, the longitude can only be -5 -4 -3 -2 -1 0 1 2 3 4 5 and 175 176 177 178 179 180 181 182 183 184 185
@@ -66,7 +68,7 @@ echo $lon
 echo $lat
 echo $userfile
 # run the project
-$bin_srp $userfile $depth $resolution $outputpath $lat $lon
+$bin_srp $userfile $reflectionNum $resolution $outputpath $lat $lon
 
 # #echo $len_lon
 # #echo $len_lat
