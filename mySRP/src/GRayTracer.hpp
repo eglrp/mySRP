@@ -77,6 +77,9 @@ public:
     GVector SRP(GRay& ray, GVector& normal , GVector& reflectionDirection,
                          double specularity, double reflectivity);
     
+    GVector SRP_t(GRay& ray, GVector& normal , GVector& reflectionDirection,
+                              double specularity, double reflectivity);
+    
     void SRP_cov(GRay& ray, GVector& normal , GVector& reflectionDirection,
                  double specularity, double reflectivity,
                  double specularity_cov, double reflectivity_cov,

@@ -71,6 +71,26 @@ void GRayTracer::SRP_cov(GRay& ray, GVector& normal , GVector& reflectionDirecti
 
 }
 
+
+
+GVector GRayTracer::SRP_t(GRay& ray, GVector& normal , GVector& reflectionDirection,
+                          double specularity, double reflectivity)
+{
+    GVector force(0.0, 0.0, 0.0);
+    double factor = ray.energy;
+    // the direct radiation force
+    GVector f1 = factor*ray.direction;
+    
+    //the specular reflected radiation force
+    GVector f2 = -factor*specularity*reflectivity*reflectionDirection;
+    
+    // the diffuse reflected radiation force + the absorbed radiation is emmited as thermal energy immediantly
+    GVector f3 = -2.0/3.0*factor*(1.0-reflectivity*specularity)*normal;
+    
+    force = f1 + f2 + f3;
+    
+    return  force;
+}
 //this funciton only deal with solar radiation pressure
 GVector GRayTracer::SRP(GRay& ray, GVector& normal , GVector& reflectionDirection,
                      double specularity, double reflectivity)
@@ -117,21 +137,23 @@ GVector GRayTracer::processor(GRay& ray, GVector& normal , GVector& reflectionDi
 {
     GVector srp(0,0,0), trr(0,0,0), force(0,0,0);
 
-    srp = SRP(ray, normal, reflectionDirection, op.solar_specularity, op.solar_reflectivity);
+    
 
     //SRP_cov(ray, normal, reflectionDirection, op.solar_specularity, op.solar_reflectivity, op.solar_specularity_cov, op.solar_reflectivity_cov, cc);
 
     if(op.mli_type) // thermal response for the MLI material, only radiation, no conduction and convection
     {
+        srp = SRP(ray, normal, reflectionDirection, op.solar_specularity, op.solar_reflectivity);
         TRR_MLI( ray, normal, op.ir_emissivity, op.solar_absorptivity,trr);
     }
     else // thermal response for the other kind of material, including radiation and conduction, no convection in space
+        // assume all the absorbed radiation is emmited as thermal energy
     {
-
+        srp = SRP_t(ray, normal, reflectionDirection, op.solar_specularity, op.solar_reflectivity);
     }
-
+    
     force = srp + trr;
-
+    
     return force;
 }
 
