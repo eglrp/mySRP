@@ -92,24 +92,10 @@ GVector GRayTracer::SRP_t(GRay& ray, GVector& normal , GVector& reflectionDirect
     return  force;
 }
 //this funciton only deal with solar radiation pressure
-GVector GRayTracer::SRP(GRay& ray, GVector& normal , GVector& reflectionDirection,
+void GRayTracer::SRP(GVector& force, GRay& ray, GVector& normal , GVector& reflectionDirection,
                      double specularity, double reflectivity)
 {
-    GVector force(0.0, 0.0, 0.0);
-
-    //**********************************************************************************************************
-    //the cos_theta has been considered in this method itself, so don't need it, but it sounds a bit confusing!
-    //**********************************************************************************************************
-    // this still need under debate
-
-    //double cos_theta = -dotproduct(ray.direction, normal)/normal.norm()/ray.direction.norm();
-
-
-    //assuming the solar flux and area are both 1.0;
-    //double factor = ray.energy*cos_theta;
-
     double factor = ray.energy;
-
 
     // the direct radiation force
     GVector f1 = factor*ray.direction;
@@ -121,8 +107,6 @@ GVector GRayTracer::SRP(GRay& ray, GVector& normal , GVector& reflectionDirectio
     GVector f3 = -2.0/3.0*factor*reflectivity*(1.0-specularity)*normal;
 
     force = f1 + f2 + f3;
-
-    return force;
 }
 
 /*
@@ -133,12 +117,11 @@ GVector GRayTracer::SRP(GRay& ray, GVector& normal , GVector& reflectionDirectio
  the final result need to be factorized with AW/c
  */
 GVector GRayTracer::processor(GRay& ray, GVector& normal , GVector& reflectionDirection,GOpticalProperty& op, double cc[9])
-                             // double specularity, double reflectivity, double emissivity, double absorptivity, int isMLI)
 {
     GVector srp(0,0,0), trr(0,0,0), force(0,0,0);
 
     
-    srp = SRP(ray, normal, reflectionDirection, op.solar_specularity, op.solar_reflectivity);
+    SRP(srp, ray, normal, reflectionDirection, op.solar_specularity, op.solar_reflectivity);
     
     //SRP_cov(ray, normal, reflectionDirection, op.solar_specularity, op.solar_reflectivity, op.solar_specularity_cov, op.solar_reflectivity_cov, cc);
     
@@ -149,7 +132,7 @@ GVector GRayTracer::processor(GRay& ray, GVector& normal , GVector& reflectionDi
     else // thermal response for the other kind of material, including radiation and conduction, no convection in space
         // assume all the absorbed radiation is emmited as thermal energy
     {
-        trr = TRR_regular(ray, normal, reflectionDirection, op.solar_specularity, op.solar_reflectivity);
+        TRR_regular(trr,ray, normal, reflectionDirection, op.solar_specularity, op.solar_reflectivity);
     }
     
     force = srp + trr;
@@ -164,28 +147,12 @@ GVector GRayTracer::processor(GRay& ray, GVector& normal , GVector& reflectionDi
  the satellite interior,like MLI
  this assumption is different from the one used by UCL
  */
-GVector GRayTracer::TRR_regular(GRay& ray, GVector& normal , GVector& reflectionDirection,
-                             double specularity, double reflectivity)
+void GRayTracer::TRR_regular(GVector& force,GRay& ray, GVector& normal , GVector& reflectionDirection,double specularity, double reflectivity)
 {
-    GVector force(0.0, 0.0, 0.0);
-    
-    //**********************************************************************************************************
-    //the cos_theta has been considered in this method itself, so don't need it, but it sounds a bit confusing!
-    //**********************************************************************************************************
-    // this still need under debate
-    
-    //double cos_theta = -dotproduct(ray.direction, normal)/normal.norm()/ray.direction.norm();
-    
-    
-    //assuming the solar flux and area are both 1.0;
-    //double factor = ray.energy*cos_theta;
-    
     double factor = ray.energy;
     
     // the diffuse reflected radiation force
-    GVector f = -2.0/3.0*factor*(1.0-reflectivity)*normal;
-    
-    return f;
+    force = -2.0/3.0*factor*(1.0-reflectivity)*normal;
     
 }
 

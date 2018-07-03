@@ -74,7 +74,7 @@ public:
                       //double specularity, double reflectivity, double emissivity, double absorptivity, int isMLI);
     
     //the function to deal with only solar radiation pressure
-    GVector SRP(GRay& ray, GVector& normal , GVector& reflectionDirection,
+    void SRP(GVector& force,GRay& ray, GVector& normal , GVector& reflectionDirection,
                          double specularity, double reflectivity);
     
     GVector SRP_t(GRay& ray, GVector& normal , GVector& reflectionDirection,
@@ -91,8 +91,7 @@ public:
     // the other version of MLI radiation force
     void TRR_MLI2(GRay& ray, GVector& normal,double emissivity, double abosrbtivity,GVector& force);
     
-    GVector TRR_regular(GRay& ray, GVector& normal , GVector& reflectionDirection,
-                        double specularity, double reflectivity);
+    void TRR_regular(GVector& force, GRay& ray, GVector& normal , GVector& reflectionDirection,double specularity, double reflectivity);
     /*
      run the ray tracing process
      */

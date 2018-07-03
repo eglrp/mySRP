@@ -21,7 +21,7 @@
 		B7CD6E821FEBD0B500DBA29C /* GVector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7CD6E6D1FEBD0B400DBA29C /* GVector.cpp */; };
 		B7CD6E841FEBD0B500DBA29C /* GRing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7CD6E701FEBD0B400DBA29C /* GRing.cpp */; };
 		B7CD6E851FEBD0B500DBA29C /* GCylinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7CD6E721FEBD0B400DBA29C /* GCylinder.cpp */; };
-		B7DAAF1F20A21A2C0068D305 /* main_userAlgorithmValidation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7DAAF1E20A21A2C0068D305 /* main_userAlgorithmValidation.cpp */; };
+		B7D1A1A620EBC505007867C5 /* main_srp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7D1A1A520EBC505007867C5 /* main_srp.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -67,7 +67,7 @@
 		B7CD6E721FEBD0B400DBA29C /* GCylinder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GCylinder.cpp; path = mySRP/src/GCylinder.cpp; sourceTree = SOURCE_ROOT; };
 		B7CD6E731FEBD0B400DBA29C /* GBoundingBox.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = GBoundingBox.hpp; path = mySRP/src/GBoundingBox.hpp; sourceTree = SOURCE_ROOT; };
 		B7CD6E741FEBD0B500DBA29C /* GCylinder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = GCylinder.hpp; path = mySRP/src/GCylinder.hpp; sourceTree = SOURCE_ROOT; };
-		B7DAAF1E20A21A2C0068D305 /* main_userAlgorithmValidation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main_userAlgorithmValidation.cpp; path = src/main_userAlgorithmValidation.cpp; sourceTree = "<group>"; };
+		B7D1A1A520EBC505007867C5 /* main_srp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main_srp.cpp; path = src/main_srp.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,7 +100,7 @@
 		B7CD6DEA1FEBC82900DBA29C /* mySRP */ = {
 			isa = PBXGroup;
 			children = (
-				B7DAAF1E20A21A2C0068D305 /* main_userAlgorithmValidation.cpp */,
+				B7D1A1A520EBC505007867C5 /* main_srp.cpp */,
 				B7CD6E231FEBCBC800DBA29C /* src */,
 			);
 			path = mySRP;
@@ -200,6 +200,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7D1A1A620EBC505007867C5 /* main_srp.cpp in Sources */,
 				B7CD6E7E1FEBD0B500DBA29C /* GGeometry.cpp in Sources */,
 				B7CD6E7B1FEBD0B500DBA29C /* GCone.cpp in Sources */,
 				B7CD6E841FEBD0B500DBA29C /* GRing.cpp in Sources */,
@@ -211,7 +212,6 @@
 				B7CD6E7C1FEBD0B500DBA29C /* GScene.cpp in Sources */,
 				B7CD6E7D1FEBD0B500DBA29C /* GPolygon.cpp in Sources */,
 				B7CD6E771FEBD0B500DBA29C /* GPixelArray.cpp in Sources */,
-				B7DAAF1F20A21A2C0068D305 /* main_userAlgorithmValidation.cpp in Sources */,
 				B7CD6E791FEBD0B500DBA29C /* GSphere.cpp in Sources */,
 				B7CD6E761FEBD0B500DBA29C /* GKDTree.cpp in Sources */,
 				B7CD6E851FEBD0B500DBA29C /* GCylinder.cpp in Sources */,

@@ -55,7 +55,7 @@ int main( int argc, const char * argv[] )
         // argv[6] ="180";
 
     printf("***********************************************************************************\n");
-    printf("Complex Space Crafts Solar Radiation Pressure Force Modelling software\n");
+    printf("Complex SpaceCrafts Solar Radiation Pressure Force Modelling software\n");
     printf("Author: Li Zhen (hpulizhen@163.com)\n");
     printf("***********************************************************************************\n");
 
