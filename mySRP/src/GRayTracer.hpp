@@ -91,7 +91,8 @@ public:
     // the other version of MLI radiation force
     void TRR_MLI2(GRay& ray, GVector& normal,double emissivity, double abosrbtivity,GVector& force);
     
-    void TRR_MLI3();
+    GVector TRR_regular(GRay& ray, GVector& normal , GVector& reflectionDirection,
+                        double specularity, double reflectivity);
     /*
      run the ray tracing process
      */

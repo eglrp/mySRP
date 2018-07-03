@@ -138,18 +138,18 @@ GVector GRayTracer::processor(GRay& ray, GVector& normal , GVector& reflectionDi
     GVector srp(0,0,0), trr(0,0,0), force(0,0,0);
 
     
-
+    srp = SRP(ray, normal, reflectionDirection, op.solar_specularity, op.solar_reflectivity);
+    
     //SRP_cov(ray, normal, reflectionDirection, op.solar_specularity, op.solar_reflectivity, op.solar_specularity_cov, op.solar_reflectivity_cov, cc);
-
+    
     if(op.mli_type) // thermal response for the MLI material, only radiation, no conduction and convection
     {
-        srp = SRP(ray, normal, reflectionDirection, op.solar_specularity, op.solar_reflectivity);
         TRR_MLI( ray, normal, op.ir_emissivity, op.solar_absorptivity,trr);
     }
     else // thermal response for the other kind of material, including radiation and conduction, no convection in space
         // assume all the absorbed radiation is emmited as thermal energy
     {
-        srp = SRP_t(ray, normal, reflectionDirection, op.solar_specularity, op.solar_reflectivity);
+        trr = TRR_regular(ray, normal, reflectionDirection, op.solar_specularity, op.solar_reflectivity);
     }
     
     force = srp + trr;
@@ -164,9 +164,29 @@ GVector GRayTracer::processor(GRay& ray, GVector& normal , GVector& reflectionDi
  the satellite interior,like MLI
  this assumption is different from the one used by UCL
  */
-void GRayTracer::TRR_MLI3()
+GVector GRayTracer::TRR_regular(GRay& ray, GVector& normal , GVector& reflectionDirection,
+                             double specularity, double reflectivity)
 {
-
+    GVector force(0.0, 0.0, 0.0);
+    
+    //**********************************************************************************************************
+    //the cos_theta has been considered in this method itself, so don't need it, but it sounds a bit confusing!
+    //**********************************************************************************************************
+    // this still need under debate
+    
+    //double cos_theta = -dotproduct(ray.direction, normal)/normal.norm()/ray.direction.norm();
+    
+    
+    //assuming the solar flux and area are both 1.0;
+    //double factor = ray.energy*cos_theta;
+    
+    double factor = ray.energy;
+    
+    // the diffuse reflected radiation force
+    GVector f = -2.0/3.0*factor*(1.0-reflectivity)*normal;
+    
+    return f;
+    
 }
 
 /*
