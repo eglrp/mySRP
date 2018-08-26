@@ -13,19 +13,14 @@
 #include "GGeometry.hpp"
 
 // the sphere geometry
-class GSphere: public GGeometry
-{
-    
-public:
-    
-    GVector centre;
-    
-    double  radius;
-    double  radius_squared;
-    void computeBoundingBox();
-    bool intersection(GRay &ray, GVector& intersection, gfc::GVector &normal);
-    
-};
+class GSphere : public GGeometry {
+ public:
+  GVector centre;
 
+  double radius;
+  double radius_squared;
+  void computeBoundingBox();
+  bool intersection(GRay &ray, GVector &intersection, gfc::GVector &normal);
+};
 
 #endif /* GSphere_hpp */

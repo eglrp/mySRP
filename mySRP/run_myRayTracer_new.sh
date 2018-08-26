@@ -3,7 +3,7 @@
 
 bin_srp=bin/srp
 bin_grid=bin/generateGrid
-resolution=0.001
+resolution=0.1
 reflectionNum=1
 currentDir=$PWD
 echo ${currentDir}
