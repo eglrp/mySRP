@@ -127,12 +127,12 @@ GVector GRayTracer::processor(GRay& ray, GVector& normal,
   SRP(srp, ray, normal, reflectionDirection, op.solar_specularity,
       op.solar_reflectivity);
 
-	/*
-  SRP_cov(ray, normal, reflectionDirection, op.solar_specularity,
-          op.solar_reflectivity, op.solar_specularity_cov,
-          op.solar_reflectivity_cov, cc);
-	*/
-	
+  /*
+SRP_cov(ray, normal, reflectionDirection, op.solar_specularity,
+    op.solar_reflectivity, op.solar_specularity_cov,
+    op.solar_reflectivity_cov, cc);
+  */
+
   if (op.mli_type)  // thermal response for the MLI material, only radiation, no
                     // conduction and convection
   {
@@ -361,9 +361,9 @@ void GRayTracer::raytracing(GRay& ray, GVector& force, double cov[9]) {
 
       force += processor(ray, normal, reflectDirection, op, cc);
 
-     // for (int i = 0; i < 9; i++) {
-     //   cov[i] += cc[i];
-     // }
+      // for (int i = 0; i < 9; i++) {
+      //   cov[i] += cc[i];
+      // }
 
       ray.start = intersection;
       // set the direction of this ray to the reflected direction

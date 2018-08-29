@@ -217,10 +217,9 @@ int main(int argc, char* argv[]) {
 //
 //
 //	double data_x[181][361]={{0.0}}; //latitude from -90-90, longitude from
-// 0-360 	double data_y[181][361]={{0.0}}; //latitude from -90-90, longitude
-// from
-// 0-360 	double data_z[181][361]={{0.0}}; //latitude from -90-90, longitude
-// from 0-360
+// 0-360 	double data_y[181][361]={{0.0}}; //latitude from -90-90,
+// longitude from 0-360 	double data_z[181][361]={{0.0}}; //latitude from
+// -90-90, longitude from 0-360
 //
 //	std::string dataPath(argv[1]);   //"galileoFOC/";
 //	//printf("%s\n", dataPath.c_str());
