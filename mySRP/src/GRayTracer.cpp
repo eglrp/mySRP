@@ -127,10 +127,12 @@ GVector GRayTracer::processor(GRay& ray, GVector& normal,
   SRP(srp, ray, normal, reflectionDirection, op.solar_specularity,
       op.solar_reflectivity);
 
+	/*
   SRP_cov(ray, normal, reflectionDirection, op.solar_specularity,
           op.solar_reflectivity, op.solar_specularity_cov,
           op.solar_reflectivity_cov, cc);
-
+	*/
+	
   if (op.mli_type)  // thermal response for the MLI material, only radiation, no
                     // conduction and convection
   {
@@ -359,9 +361,9 @@ void GRayTracer::raytracing(GRay& ray, GVector& force, double cov[9]) {
 
       force += processor(ray, normal, reflectDirection, op, cc);
 
-      for (int i = 0; i < 9; i++) {
-        cov[i] += cc[i];
-      }
+     // for (int i = 0; i < 9; i++) {
+     //   cov[i] += cc[i];
+     // }
 
       ray.start = intersection;
       // set the direction of this ray to the reflected direction
@@ -429,10 +431,16 @@ GVector GRayTracer::run() {
 
     force += f;
 
-    //        covariance[0] += c[0];covariance[1] += c[1];covariance[2] += c[2];
-    //        covariance[3] += c[3];covariance[4] += c[4];covariance[5] += c[5];
-    //        covariance[6] += c[6];covariance[7] += c[7];covariance[8] += c[8];
-    //
+    covariance[0] += c[0];
+    covariance[1] += c[1];
+    covariance[2] += c[2];
+    covariance[3] += c[3];
+    covariance[4] += c[4];
+    covariance[5] += c[5];
+    covariance[6] += c[6];
+    covariance[7] += c[7];
+    covariance[8] += c[8];
+
     pixelarray.totalRay++;
 
     // std::cout<<"hello"<<std::endl;

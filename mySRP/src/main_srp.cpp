@@ -49,7 +49,7 @@ int main(int argc, const char* argv[]) {
       "************************************************************************"
       "***********\n");
   printf(
-      "Complex SpaceCrafts Solar Radiation Pressure Force Modelling "
+      "Complex Spacecraft Solar Radiation Pressure Force Modelling "
       "software\n");
   printf("Author: Li Zhen (hpulizhen@163.com)\n");
   printf(

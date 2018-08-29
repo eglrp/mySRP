@@ -17,8 +17,8 @@ double GGeometry::BoundingLimit =
     0.001;  // the default minimum value for the bounding box of plane
 
 // the default standard deviation of the optical properties defined in GRay.h
-double GOpticalProperty::default_std_v = 0.1;
-double GOpticalProperty::default_std_u = 0.1;
-double GOpticalProperty::default_std_d = 0.1;
+double GOpticalProperty::default_std_v = 0.001;
+double GOpticalProperty::default_std_u = 0.001;
+double GOpticalProperty::default_std_d = 0.001;
 
 GGeometry::GGeometry() { index = 0; }

@@ -21,8 +21,8 @@ reflectionNum=$5
 ## for GNSS attitude control, the longitude can only be -5 -4 -3 -2 -1 0 1 2 3 4 5 and 175 176 177 178 179 180 181 182 183 184 185
 #longitude=( 178 179 180 -179 -178 )
 
-longitude=( 180 )
-#longitude=(.)
+#longitude=( 180 )
+longitude=(.)
 len_lon=${#longitude[@]}
 
 #latitude=(45 30)
