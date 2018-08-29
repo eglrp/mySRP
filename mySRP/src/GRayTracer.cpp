@@ -11,7 +11,7 @@
 // the maximum reflection number
 int GRayTracer::MAX_DEPTH = 1;
 double GRayTracer::CLIGHT = 299792458;
-double GRayTracer::SOLAR_CONST = 1368.0;
+double GRayTracer::SOLAR_CONST = 1361.0;
 double GRayTracer::sigma = 5.670367E-8;                 // W/m^2/K^4
 double GRayTracer::T4 = 298.0 * 298.0 * 298.0 * 298.0;  // Kelvin to the power 4
 double GRayTracer::T0 =
