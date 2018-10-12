@@ -192,7 +192,7 @@ bool GPolygon::intersection(GRay& ray, gfc::GVector& intersection,
     normal = cz;
 
     // the ray is from the back side // the ray is from the back side, according
-    // to marek's phd thesis, this ray should be rejected
+    // to marek's phd thesis, this ray should be rejected, but this case is accepted in this software to deal with multiple reflections
     if (Ntn >= 0.0) {
       normal = -cz;
     } else  // ray is from the front side

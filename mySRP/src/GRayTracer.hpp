@@ -17,7 +17,7 @@
 
 #include <memory>
 
-#define USE_KDTREE
+//#define USE_KDTREE
 
 /*
  some tips and tutorial can be found at

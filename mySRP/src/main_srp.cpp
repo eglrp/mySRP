@@ -33,17 +33,17 @@ std::vector<std::string> split(const std::string& s, const std::string& delim) {
 
 int main(int argc, const char* argv[]) {
   // test main function parameters
-  // argv[1] = "GalileoIOV.txt";  //GalileoIOV.txt  GPSIIR_NONAP.txt
-  //
-  // argv[2] = "1";
-  //
-  // argv[3] = "0.01";
-  //
-  // argv[4] = "./";
-  //
-  // argv[5] = "30";  // "."
-  //
-  // argv[6] ="180";
+   argv[1] = "GalileoIOV.txt";  //GalileoIOV.txt  GPSIIR_NONAP.txt
+  
+   argv[2] = "1";
+  
+   argv[3] = "0.01";
+  
+   argv[4] = "./";
+  
+   argv[5] = ".";  // "."
+  
+   argv[6] ="180";
 
   printf(
       "************************************************************************"
@@ -221,19 +221,19 @@ int main(int argc, const char* argv[]) {
       //                    );
 
       // output with covariance
-      sprintf(
-          buffer,
-          "%.3f %.3f %ld %lu %f %f %.3f %.3f %.16E %.16E %.16E %.16E %.16E "
-          "%.16E %.16E %.16E %.16E %.16E %.16E %.16E %.16E\n",
-          lat, lon, myraytracer.rayIntersected, myraytracer.pixelarray.totalRay,
-          double(myraytracer.rayIntersected) / myraytracer.pixelarray.totalRay,
-          myraytracer.area_hit, myraytracer.pixelarray.len_x,
-          myraytracer.pixelarray.len_y, force.x, force.y, force.z, force.norm(),
-          myraytracer.covariance[0], myraytracer.covariance[1],
-          myraytracer.covariance[2], myraytracer.covariance[3],
-          myraytracer.covariance[4], myraytracer.covariance[5],
-          myraytracer.covariance[6], myraytracer.covariance[7],
-          myraytracer.covariance[8]);
+//      sprintf(
+//          buffer,
+//          "%.3f %.3f %ld %lu %f %f %.3f %.3f %.16E %.16E %.16E %.16E %.16E "
+//          "%.16E %.16E %.16E %.16E %.16E %.16E %.16E %.16E\n",
+//          lat, lon, myraytracer.rayIntersected, myraytracer.pixelarray.totalRay,
+//          double(myraytracer.rayIntersected) / myraytracer.pixelarray.totalRay,
+//          myraytracer.area_hit, myraytracer.pixelarray.len_x,
+//          myraytracer.pixelarray.len_y, force.x, force.y, force.z, force.norm(),
+//          myraytracer.covariance[0], myraytracer.covariance[1],
+//          myraytracer.covariance[2], myraytracer.covariance[3],
+//          myraytracer.covariance[4], myraytracer.covariance[5],
+//          myraytracer.covariance[6], myraytracer.covariance[7],
+//          myraytracer.covariance[8]);
 
       outputStr += buffer;
 

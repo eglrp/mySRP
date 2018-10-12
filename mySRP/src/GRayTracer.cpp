@@ -41,36 +41,52 @@ void GRayTracer::SRP_cov(GRay& ray, GVector& normal,
                          GVector& reflectionDirection, double specularity,
                          double reflectivity, double specularity_cov,
                          double reflectivity_cov, double cc[9]) {
-  double dUV = 0.0;  // the co-variance betweeen reflectiviy v and specularity u
+  //double dUV = 0.0;  // the co-variance betweeen reflectiviy v and specularity u
 
-  GVector dfdv = -reflectionDirection * specularity -
-                 2.0 / 3.0 * (1.0 - specularity) * normal;
+  //double factor = GPixelArray::pixelArea * GRayTracer::SOLAR_CONST / GRayTracer::CLIGHT;
+    double factor = 1.0;
+  GVector dfdv = factor*(-reflectionDirection * specularity -
+                 2.0 / 3.0 * (1.0 - specularity) * normal);
 
-  GVector dfdu =
-      -reflectionDirection * reflectivity + 2.0 / 3.0 * reflectivity * normal;
+  GVector dfdu =factor*(-reflectionDirection * reflectivity + 2.0 / 3.0 * reflectivity * normal);
+    
+    
+  cc[0] = dfdv.x*dfdv.x*reflectivity_cov + dfdu.x*dfdu.x*specularity_cov;
+  cc[1] = dfdv.x*dfdv.y*reflectivity_cov + dfdu.x*dfdu.y*specularity_cov;
+  cc[2] = dfdv.x*dfdv.z*reflectivity_cov + dfdu.x*dfdu.z*specularity_cov;
+  cc[3] = cc[1];
+  cc[4] = dfdv.y*dfdv.y*reflectivity_cov + dfdu.y*dfdu.y*specularity_cov;
+  cc[5] = dfdv.y*dfdv.z*reflectivity_cov + dfdu.y*dfdu.z*specularity_cov;
+  cc[6] = cc[2];
+  cc[7] = cc[5];
+  cc[8] = dfdv.z*dfdv.z*reflectivity_cov + dfdu.z*dfdu.z*specularity_cov;
+    
+    
+//
+//  double tmp[6] = {0.0};  // 3 by 2
+//
+//  tmp[0] = dfdv.x * reflectivity_cov + dfdu.x * dUV;
+//  tmp[1] = dfdv.x * dUV + dfdu.x * specularity_cov;
+//
+//  tmp[2] = dfdv.y * reflectivity_cov + dfdu.y * dUV;
+//  tmp[3] = dfdv.y * dUV + dfdu.y * specularity_cov;
+//
+//  tmp[4] = dfdv.z * reflectivity_cov + dfdu.z * dUV;
+//  tmp[5] = dfdv.z * dUV + dfdu.z * specularity_cov;
+//
+//  cc[0] = tmp[0] * dfdv.x + tmp[1] * dfdu.x;
+//  cc[1] = tmp[0] * dfdv.y + tmp[1] * dfdu.y;
+//  cc[2] = tmp[0] * dfdv.z + tmp[1] * dfdu.z;
+//
+//  cc[3] = tmp[2] * dfdv.x + tmp[3] * dfdu.x;
+//  cc[4] = tmp[2] * dfdv.y + tmp[3] * dfdu.y;
+//  cc[5] = tmp[2] * dfdv.z + tmp[3] * dfdu.z;
+//
+//  cc[6] = tmp[4] * dfdv.x + tmp[5] * dfdu.x;
+//  cc[7] = tmp[4] * dfdv.y + tmp[5] * dfdu.y;
+//  cc[8] = tmp[4] * dfdv.z + tmp[5] * dfdu.z;
 
-  double tmp[6] = {0.0};  // 3 by 2
-
-  tmp[0] = dfdv.x * reflectivity_cov + dfdu.x * dUV;
-  tmp[1] = dfdv.x * dUV + dfdu.x * specularity_cov;
-
-  tmp[2] = dfdv.y * reflectivity_cov + dfdu.y * dUV;
-  tmp[3] = dfdv.y * dUV + dfdu.y * specularity_cov;
-
-  tmp[4] = dfdv.z * reflectivity_cov + dfdu.z * dUV;
-  tmp[5] = dfdv.z * dUV + dfdu.z * specularity_cov;
-
-  cc[0] = tmp[0] * dfdv.x + tmp[1] * dfdu.x;
-  cc[1] = tmp[0] * dfdv.y + tmp[1] * dfdu.y;
-  cc[2] = tmp[0] * dfdv.z + tmp[1] * dfdu.z;
-
-  cc[3] = tmp[2] * dfdv.x + tmp[3] * dfdu.x;
-  cc[4] = tmp[2] * dfdv.y + tmp[3] * dfdu.y;
-  cc[5] = tmp[2] * dfdv.z + tmp[3] * dfdu.z;
-
-  cc[6] = tmp[4] * dfdv.x + tmp[5] * dfdu.x;
-  cc[7] = tmp[4] * dfdv.y + tmp[5] * dfdu.y;
-  cc[8] = tmp[4] * dfdv.z + tmp[5] * dfdu.z;
+//int testc = 0;
 }
 
 GVector GRayTracer::SRP_t(GRay& ray, GVector& normal,
@@ -127,11 +143,11 @@ GVector GRayTracer::processor(GRay& ray, GVector& normal,
   SRP(srp, ray, normal, reflectionDirection, op.solar_specularity,
       op.solar_reflectivity);
 
-  /*
+  
 SRP_cov(ray, normal, reflectionDirection, op.solar_specularity,
     op.solar_reflectivity, op.solar_specularity_cov,
     op.solar_reflectivity_cov, cc);
-  */
+  
 
   if (op.mli_type)  // thermal response for the MLI material, only radiation, no
                     // conduction and convection
@@ -361,9 +377,9 @@ void GRayTracer::raytracing(GRay& ray, GVector& force, double cov[9]) {
 
       force += processor(ray, normal, reflectDirection, op, cc);
 
-      // for (int i = 0; i < 9; i++) {
-      //   cov[i] += cc[i];
-      // }
+       for (int i = 0; i < 9; i++) {
+         cov[i] += cc[i];
+       }
 
       ray.start = intersection;
       // set the direction of this ray to the reflected direction
@@ -404,8 +420,7 @@ GVector GRayTracer::run() {
   // final force
   double c[9] = {0.0};
 
-  double coefficient =
-      (GPixelArray::pixelArea * GRayTracer::SOLAR_CONST / GRayTracer::CLIGHT);
+  //double coefficient = GPixelArray::pixelArea * GRayTracer::SOLAR_CONST / GRayTracer::CLIGHT;
   int count = 0;
   // pixelarray.i_index = 0;
   // pixelarray.j_index = 0;
@@ -440,9 +455,9 @@ GVector GRayTracer::run() {
     covariance[6] += c[6];
     covariance[7] += c[7];
     covariance[8] += c[8];
-
+    
     pixelarray.totalRay++;
-
+    
     // std::cout<<"hello"<<std::endl;
 
     // printf("%d\n", pixelarray.totalRay);
@@ -514,10 +529,10 @@ GVector GRayTracer::run() {
 
   // after processing all the rays
   // do the factorization
-  force *= coefficient;
-
+  force *= (GPixelArray::pixelArea * GRayTracer::SOLAR_CONST / GRayTracer::CLIGHT);
+    
   for (int i = 0; i < 9; i++) {
-    covariance[i] *= coefficient;
+      covariance[i] *=  (GRayTracer::SOLAR_CONST / GRayTracer::CLIGHT)*(GRayTracer::SOLAR_CONST / GRayTracer::CLIGHT)*GPixelArray::pixelArea*GPixelArray::pixelArea*rayIntersected;
   }
 
   // after the ray tracing, add in the thermal effect of the MLI that are not
